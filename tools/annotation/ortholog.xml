@@ -1,0 +1,26 @@
+<tool id="ensembl1" name="EnsEMBL: Orthologs" version="1.0.1">
+        <description>Find orthologous ids for genes</description>
+        <command interpreter="perl">ortholog.pl $input $taxon $output</command>
+        <inputs>
+                <param name="input" type="data" format="txt" label="Use these ids"/>
+                <param name="taxon" type="select" value="Human" label="species to find orthologs in">
+                	<option value="9606" selected="true">Human</option>
+					<option value="10090">Mouse</option>
+				</param>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Fetches the orthologs of genes in a list.
+			
+**Input:** A list of genes and a NCBI taxon id of the species to find orthologs in.
+			
+**Output:** A list of gene ids from that species.
+
+----
+
+Ensembl article: P Flicek, et.al. Ensembl 2011. Nucleic Acids Research, Database issue, 2011, D800-D806.	
+        </help>
+</tool>

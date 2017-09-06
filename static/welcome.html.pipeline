@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="style/base.css" type="text/css" />
+</head>
+<body>
+
+<div class="document">  
+
+<h3>High throughput sequencing pipelines</h3>
+<p>This Galaxy instance provides a custom interface for running high throughput
+sequencing pipelines. Building on the standard Galaxy platform, it provides a
+graphical approach to run full analysis pipelines.
+</p>
+
+
+<div class="infomessage">
+<strong>Example usage</strong><hr/>
+<ol>
+  <li>Login 
+  <ul>
+    <li>'User' -> 'Login'
+    <li>username 'example@example.com'
+    <li>password 'example'
+  </ul>
+  <li>Import data to history
+  <ul>
+    <li> 'Shared Data' -> 'Data Libraries' -> 'Exome example'
+    <li> Select fastq files and target and bait BED files
+    <li> Import to current history
+  </ul>
+  <li>View data in history
+  <ul>
+    <li> 'Analyze Data'
+    <li> Use eye icon to view data in center plan
+  </ul>
+  <li>Use custom pipeline interface to run analysis
+  <ul>
+    <li> 'Pipeline'
+    <li> Follow wizard to submit paired end sample for variant calling.
+  </ul>
+  <li>View results data
+  <ul>
+    <li>'Shared Data' -> 'Data Libraries' -> 'example@example.com'
+    <li>Previously run results are available for import into history and analysis.
+    <li>The pipeline uploads your results when they finish.
+  </ul>
+</ol>
+</div>
+
+
+</body>
+</html>

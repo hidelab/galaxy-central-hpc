@@ -1,0 +1,35 @@
+<tool id="intstat3" name="Filter IntervalStats by Existence" version="1.0.1">
+        <description>Get common peaks from two different sets of intervals</description>
+        <command interpreter="python">is_dual.py $is1 $is2 $pcut $output</command>
+        <inputs>
+                <param name="is1" type="data" format="tabular" label="First IntervalStats Output"/>
+                
+                <param name="is2" type="data" format="tabular" label="Second IntervalStats Output"/>
+                
+                <param name="pcut" type="float" size="5" value="0.05" label="P-value Cutoff"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="tabular"/>
+        </outputs>
+       
+        <help>
+**Function:** Filters those that are not common to both sets from two different IntervalStats outputs.
+			
+**Input:** A list of Entrez Gene ids in tabular format
+			
+**Settings:** Choice of ontology of biological process, molecular function, or biological process.  Species choices between human, worm, zebrafish, or mouse.  Select p-value cutoff.
+			
+**Output:** A text table of GO terms and the enrichment statistics having the following attribute columns.
+
+* Term id	
+* P-value	
+* Expected
+* Observed	
+* Number of genes	
+* Term description
+
+----
+
+GOstats article: S Falcon and R Gentleman. Using GOstats to test gene lists for GO term association. Bioinformatics, 23(2):257-8, 2007.	
+        </help>
+</tool>

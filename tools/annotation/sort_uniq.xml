@@ -1,0 +1,19 @@
+<tool id="general0" name="Rm Dups" version="1.0.1">
+        <description>Remove duplicates from a list</description>
+        <command interpreter="perl">sort_uniq.pl $input $output</command>
+        <inputs>
+                <param name="input" type="data" format="txt" label="Uniquify this data"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Removes duplicate entries from a list.
+			
+**Input:** A list of anything.
+			
+**Output:** A new list of unique items.
+
+        </help>
+</tool>

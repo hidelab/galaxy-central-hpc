@@ -1,0 +1,47 @@
+<tool id="scde-intersect" name="SCDE Intersect" version="1.0" hidden="false">
+
+<description>find common genes within multiple lists</description>
+
+<version_string>scde --version</version_string>
+
+<command interpreter="perl">
+    scde intersect --output tab
+                   #for $i in $lists
+                   --file ${i.filename} --column ${i.column}
+                   #end for
+                   > $output
+</command>
+
+<inputs>
+  <repeat name="lists" title="List">
+    <param name="filename" type="data" format="tabular" label="Dataset" help="Select a list for comparison from your History" />
+    <param name="column" type="data_column" data_ref="filename" label="Gene Column" help="Select the column number corresponding to the gene identifier" />
+  </repeat>
+</inputs>
+
+<outputs>
+  <data  format="txt" name="output" />
+</outputs> 
+
+<!-- MongoDB driver deprecation warnings are sent to stderr causing tool execution getting marked as failed -->
+<stdio>
+  <exit_code range="1:" level="fatal" description="Error running tool"/>
+</stdio>
+
+<help>
+**What it does**
+
+This tool compares one or more lists and displays the common elements found in the selected column.
+
+-----
+
+.. class:: infomark
+
+Upload data in tabular format to your history using the "Get Data" -> "Upload File" tool.
+
+.. class:: infomark
+
+Additional lists may be added using the "Add new List" button.
+</help>
+</tool>
+

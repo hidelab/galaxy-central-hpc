@@ -1,0 +1,51 @@
+<tool id="GeneMANIA" name="GeneMANIA: link" version="1.0.1">
+        <description>go to GeneMANIA with a geneset</description>
+        
+        <command interpreter="perl">GM_link.pl $input $output $site $spec </command>
+        
+        <inputs> 
+			<param name="input" type="data" format="txt" label="Annotate these genes"/>
+			
+			<param name="site" type="hidden" value="http://genemania.org/link" label="Address"/>
+			
+            <param name="spec" type="select" value="9606" label="Species">
+               	<option value="9606" selected="true">Homo sapiens</option>
+				<option value="10090">Mus musculus</option>
+				<option value="4932">Saccharomyces cerevisiae</option>
+				<option value="7227">Drosophila melanogaster</option>
+				<option value="6239">Caenorhabditis elegans</option>
+	
+			</param>
+				 
+           
+        </inputs>
+        <outputs>
+                <data name="output" format="html"/>
+        </outputs>
+       
+        <help>
+**Function:** Creates a link out for a query to GeneMANIA. 
+			
+**Input:** A text list of gene identifiers of Entrez gene, Ensembl gene, gene symbols, Uniprot/SwissProt and RefSeq or unique gene names per GeneMANIA's input criteria.
+
+* CASC5
+* ENSG00000137812
+* 57082
+* Q8NG31
+* BRCA1
+* ENSG00000012048
+* P38398 
+* NM_007294
+
+**Settings:**  
+
+Species of query organism 
+
+**Output:** A link to GeneMANIA.
+  
+----
+
+GeneMANIA article: Warde-Farley D, Donaldson SL, Comes O, Zuberi K, Badrawi R, Chao P, Franz M, Grouios C, Kazi F, Lopes CT, Maitland A, Mostafavi S, Montojo J, Shao Q, Wright G, Bader GD, Morris Q. The GeneMANIA prediction server: biological network integration for gene prioritization and predicting gene function. Nucleic Acids Res. 2010 Jul 1;38 Suppl:W214-20
+
+        </help>
+</tool>

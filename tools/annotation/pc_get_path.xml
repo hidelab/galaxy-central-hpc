@@ -1,0 +1,31 @@
+<tool id="pathcom0" name="Pathway: Detailed Information" version="1.0.1">
+        <description>Get pathway details from Pathway Commons</description>
+        <command interpreter="python">pc_get_path.py $cpaths $output</command>
+        <inputs>
+                <param name="cpaths" type="data" format="txt" label="Annotate these pathways"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="tabular"/>
+        </outputs>
+       
+        <help>
+**Function:** Enriches Gene Ontology terms for a list of gene ids
+			
+**Input:** A list of Entrez Gene ids in tabular format
+			
+**Settings:** Choice of ontology of biological process, molecular function, or biological process.  Species choices between human, worm, zebrafish, or mouse.  Select p-value cutoff.
+			
+**Output:** A text table of GO terms and the enrichment statistics having the following attribute columns.
+
+* Term id	
+* P-value	
+* Expected
+* Observed	
+* Number of genes	
+* Term description
+
+----
+
+GOstats article: S Falcon and R Gentleman. Using GOstats to test gene lists for GO term association. Bioinformatics, 23(2):257-8, 2007.	
+        </help>
+</tool>

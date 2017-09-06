@@ -1,0 +1,25 @@
+%YAML 1.2
+---
+annotation:
+    - id
+    - name
+    - label
+    - canonicalName
+    - weight
+    - species
+style:
+    global:
+        backgroundColor: "#003399"
+        tooltipDelay: 10
+    nodes:
+        label: { passthroughMapper: { attrName: "id" }}
+        borderWidth: 0.25
+        borderColor: "#7D52FF"
+    edges:
+        color: "#999999"
+        width: 2
+        mergeWidth: 2
+        opacity: 1
+        label: { passthroughMapper: { attrName: "id" }}
+        labelFontSize: 10
+        labelFontWeight: bold

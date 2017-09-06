@@ -1,0 +1,126 @@
+<tool id="pathprint-fingerprint" name="Create Pathway Fingerprint">
+
+<!--
+<description>Create Pathway Fingerprint.</description>
+-->
+
+<command>
+fingerprint.r
+#if $query.type == "geo"
+geo $query.input $output
+#elif $query.type == "cel"
+cel $query.input $output
+#elif $query.type == "expr"
+expr $query.input $query.platform $output
+#end if
+<!--
+> /dev/null 2>&amp;1
+-->
+</command>
+
+<inputs> 
+  <conditional name="query">
+    <param name="type" type="select" label="Query source" help="Select an expression matrix from your User History, or enter a GEO identifier to automatically download an experiment from GEO.">
+      <option value="geo">GEO ID</option>
+<!--  <option value="cel">CEL File</option> -->
+      <option value="expr" selected="true">Expression Matrix</option>
+    </param> 
+
+    <when value="geo"> 
+      <param name="input" size="10" type="text" value="GSM99618" label="GEO ID" help="GSM and GSE identifiers are supported. E.g. GSM99618 or GSE4416. Please see below for the list of supported platforms.">
+        <validator type="regex" message="The provided GEO ID does not appear to be valid.">^(GSM|GSE|gsm|gse)\d+$</validator>
+      </param>
+    </when>
+
+<!-- shs 042412: no affycel file type available in Upload File -->
+<!--    <when value="cel">
+      <param name="input" type="data" label="CEL file" help="Submit an Affymetrix CEL file from your history"/> 
+    </when> -->
+
+    <when value="expr">
+      <param name="input" type="data" label="Expression Matrix" help="The expression matrix is required to have the following format: columns = samples; rows = normalized expression values." />
+
+      <param name="platform" type="select" label="Platform" help="Select the array platform. Only those in the dropdown list are supported.">
+        <option value="GPL72">GPL72 - Affymetrix Drosophila Genome Array</option>
+	<option value="GPL81">GPL81 - Affymetrix Mouse Genome U74A Version 2 Array</option>
+        <option value="GPL85">GPL85 - Affymetrix Rat Genome U34 Array</option>
+        <option value="GPL91">GPL91 - Affymetrix Human Genome U95A Array</option>
+        <option value="GPL96">GPL96 - Affymetrix Human Genome U133A Array</option>
+        <option value="GPL200">GPL200 - Affymetrix C. elegans Genome Array</option>
+        <option value="GPL339">GPL339 - Affymetrix Mouse Expression 430A Array</option>
+        <option value="GPL341">GPL341 - Affymetrix Rat Expression 230A Array</option>
+        <option value="GPL570">GPL570 - Affymetrix Human Genome U133 Plus 2.0 Array</option>
+        <option value="GPL571">GPL571 - Affymetrix Human Genome U133A 2.0 Array</option>
+        <option value="GPL1261">GPL1261 - Affymetrix Mouse Genome 430 2.0 Array</option>
+        <option value="GPL1319">GPL1319 - Affymetrix Zebrafish Genome Array</option>
+        <option value="GPL1322">GPL1322 - Affymetrix Drosophila Genome 2.0 Array</option>
+        <option value="GPL1355">GPL1355 - Affymetrix Rat Genome 230 2.0 Array</option>
+	<option value="GPL2700">GPL2700 - Sentrix HumanRef-8 Expression BeadChip</option>
+	<option value="GPL2986">GPL2986 - ABI Human Genome Survey Microarray Version 2</option>
+	<option value="GPL2995">GPL2995 - ABI Mouse Genome Survey Microarray</option>
+        <option value="GPL3921">GPL3921 - Affymetrix HT Human Genome U133A Array</option>
+        <option value="GPL4685">GPL4685 - Affymetrix GeneChip HT-HG_U133A Early Access Array</option>
+        <option value="GPL6102">GPL6102 - Illumina human-6 v2.0 expression beadchip</option>
+	<option value="GPL6103">GPL6103 - Illumina mouseRef-8 v1.1 expression beadchip</option>
+        <option value="GPL6104">GPL6104 - Illumina humanRef-8 v2.0 expression beadchip</option>
+	<option value="GPL6105">GPL6105 - Illumina mouse-6 v1.1 expression beadchip</option>
+	<option value="GPL6244">GPL6244 - Affymetrix Human Gene 1.0 ST Array [transcript (gene) version]</option>
+	<option value="GPL6246">GPL6246 - Affymetrix Mouse Gene 1.0 ST Array [transcript (gene) version]</option>
+	<option value="GPL6333">GPL6333 - Illumina Mouse Ref-6 V1</option>
+	<option value="GPL6883">GPL6883 - Illumina HumanRef-8 v3.0 expression beadchip</option>
+        <option value="GPL6884">GPL6884 - Illumina HumanWG-6 v3.0 expression beadchip</option>
+	<option value="GPL6885">GPL6885 - Illumina MouseRef-8 v2.0 expression beadchip</option>
+	<option value="GPL6887">GPL6887 - Illumina MouseWG-6 v2.0 expression beadchip</option>
+	<option value="GPL6947">GPL6947 - Illumina HumanHT-12 v3.0 expression beadchip</option>
+        <option value="GPL8300">GPL8300 - Affymetrix Human Genome U95 Version 2 Array</option>
+        <option value="GPL8321">GPL8321 - Affymetrix Mouse Genome 430A 2.0 Array</option>
+      </param>
+    </when>
+  </conditional>
+</inputs>
+
+<outputs> 
+  <data format="tabular" name="output" label="PathPrint fingerprint"/>
+</outputs>
+
+<stdio>
+  <exit_code range="1:" level="fatal" />
+</stdio>
+
+<help> 
+
+**What it does**
+
+This tool computes a functional pathway profile for the input data. Gene expression values
+for each sample are mapped to a set of 633 pathways that have been curated from KEGG,
+Reactome, WikiPathways and Netpath. Pathways are assigned a value of [-1,0,1], where -1
+indicates low expression, 0 indicates average expression, and +1 indicates high expression
+of the pathway relative to a background comprised of 188,502 arrays from the Gene
+Expression Omnibus (GEO).
+
+.. class:: infomark
+
+Be sure to select the appropriate platform for your experiment or you may get spurious results. A list of supported platforms is available at the http://compbio.sph.harvard.edu/hidelab/pathprint/Platform_coverage.html.
+
+-----
+
+**Input**
+
+1. Expression Matrix (tabular format): columns represent samples and rows are normalized expression values for each sample. Also specify the appropriate platform (see note above).
+
+OR
+
+2. GEO series ID (GSE) or sample ID (GSM)
+
+
+**Output**
+
+PathPrint Fingerprint: a tabular format file where columns represent samples and
+row values are pathway activities
+
+-----
+
+Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+</help>
+</tool>
+

@@ -1,0 +1,29 @@
+<tool id="graphite0" name="Pathway Graph" version="1.0.1">
+        <description>Produce pathway networks</description>
+        <command interpreter="python">pathway_graph.py $output $db $path > /dev/null </command>
+        <inputs>
+        	<param name="db" type="select" value="reactome" label="pathway database">
+                	<option value="reactome" selected="true">Reactome</option>
+					<option value="biocarta">Biocarta</option>
+					<option value="nci">NCI</option>
+					<option value="kegg">KEGG</option>
+				</param>
+				
+            <param name="path" type="text" size="50" value="mRNA Splicing" label="Pathway Name"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Fetches the genes located on inputted intervals
+			
+**Input:** A BED file of intervals
+			
+**Output:** A BED file containing the intervals and Ensembl gene ids.
+
+----
+
+Ensembl article: P Flicek, et.al. Ensembl 2011. Nucleic Acids Research, Database issue, 2011, D800-D806.	
+        </help>
+</tool>

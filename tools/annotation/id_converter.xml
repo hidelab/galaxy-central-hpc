@@ -1,0 +1,52 @@
+<tool id="biomart0" name="Convert IDs (Biomart)" version="1.0.1">
+        <description>Use Biomart to convert ids</description>
+        <command interpreter="python">BiomaRt.py $input $output $att_from $att_to </command>
+        <inputs>
+                <param name="input" type="data" format="txt" label="Use these ids"/>
+                
+                <param name="att_from" type="select" value="ensembl_gene_id" label="input id type">
+                	<option value="ensembl_gene_id" selected="true">Ensembl Gene</option>
+                	<option value="ensembl_peptide_id">Emsembl Protein</option>
+					<option value="ensembl_transcript_id">Ensembl Transcript</option>
+					<option value="hgnc_symbol">HGNC</option>   
+					<option value="uniprot_sptrembl">UniProt</option>
+					<option value="uniprot_swissprot_accession">SwissProt</option>
+					<option value="embl">EMBL</option>
+					<option value="entrezgene">Entrez Gene</option>
+					<option value="protein_id">Genbank Protein</option>
+					<option value="refseq_mrna">Refseq mRNA</option>
+					<option value="refseq_peptide">Refseq Protein</option> 
+				</param>
+
+                <param name="att_to" type="select" value="ensembl_gene_id" label="id type to convert to">
+                	<option value="ensembl_gene_id" selected="true">Ensembl Gene</option>
+                	<option value="ensembl_peptide_id">Emsembl Protein</option>
+					<option value="ensembl_transcript_id">Ensembl Transcript</option>
+					<option value="hgnc_symbol">HGNC</option>
+					<option value="uniprot_sptrembl">UniProt</option>
+					<option value="uniprot_swissprot_accession">SwissProt</option>
+					<option value="embl">EMBL</option>
+					<option value="entrezgene">Entrez Gene</option>
+					<option value="protein_id">Genbank Protein</option>
+					<option value="refseq_mrna">Refseq mRNA</option>
+					<option value="refseq_peptide">Refseq Protein</option>
+				</param>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Converts ids from one type to another
+			
+**Input:** A list of ids in text format
+			
+**Settings:** Choose the type of id you are converting from and converting to.
+			
+**Output:** A list of ids in text format
+
+----
+
+Biomart article: J Guberman, et.al. BioMart Central Portal: an open database network for the biological community. Nucleic Acids Research, Database issue, 2011.	
+        </help>
+</tool>

@@ -1,0 +1,31 @@
+<tool id="pathcom1" name="Pathway: Pathway from Genes" version="1.0.1">
+        <description>Find pathways from a list of gene ids</description>
+        <command interpreter="python">pc_by_ids.py $ids $type $output</command>
+        <inputs>
+                <param name="ids" type="data" format="txt" label="Annotate these genes"/>
+                
+                <param name="type" type="select" value="GENE_SYMBOL" label="Type of id to use">
+                	<option value="GENE_SYMBOL" selected="true">HGNC</option>
+					<option value="ENTREZ_GENE">Entrez Gene</option>
+					<option value="UNIPROT">UniProt</option>
+					<option value="CPATH_ID">Pathway Commons</option>
+				</param>
+        </inputs>
+        <outputs>
+                <data name="output" format="tabular"/>
+        </outputs>
+       
+        <help>
+**Function:** Queries Pathway Commons for pathways based on a set of gene or pathway ids
+			
+**Input:** A list of ids.
+			
+**Settings:** Choice of id type: HGNC, Entrez Gene, Uniprot, or Pathway Commons CPath id
+			
+**Output:** A text table of GO terms and the enrichment statistics having the following attribute columns.
+
+----
+
+GOstats article: S Falcon and R Gentleman. Using GOstats to test gene lists for GO term association. Bioinformatics, 23(2):257-8, 2007.	
+        </help>
+</tool>

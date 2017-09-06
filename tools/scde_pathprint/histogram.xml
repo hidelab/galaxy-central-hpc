@@ -1,0 +1,21 @@
+<tool id="pathprint-histogram" name="Generate a Histogram">
+
+  <command>histogram.r $input $output</command>
+
+  <inputs> 
+    <param name="input" type="data" label="Consensus Distance" help="Submit a Consensus Distance file from your history"/> 
+  </inputs>
+
+  <outputs> 
+    <data format="pdf" name="output" label="Histogram"/> 
+  </outputs>
+
+  <stdio>
+    <exit_code range="1:" level="fatal" />
+  </stdio>
+
+  <help> 
+    Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+  </help>
+
+</tool>

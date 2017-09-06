@@ -1,0 +1,22 @@
+<tool id="revigo" name="REVIGO: link" version="1.0.1">
+        <description>Go to REVIGO with a list of GO terms</description>
+        <command interpreter="python">ReviGO.py $terms $output</command>        
+        
+        <inputs>
+                <param name="terms" type="data" format="txt" label="Use these terms"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="html"/>
+        </outputs>
+        <help>
+**Function:** Creates a link out to REVIGO for a given list of GO terms.
+			
+**Input:** A list of GO terms in text format
+			
+**Output:** HTML link to REVIGO
+			
+----
+
+REVIGO article: Supek F, Bošnjak M, Škunca N, Šmuc T. "REVIGO summarizes and visualizes long lists of Gene Ontology terms" PLoS ONE 2011.
+        </help>
+</tool>

@@ -1,0 +1,26 @@
+<tool id="gProfiler1" name="GOSt: Term Enrichment" version="1.0.1">
+        <description>Queries g:Profler with a single GO term</description>
+        
+        <command interpreter="python">gPro_by_term.py $term $output $site </command>
+       
+        <inputs> 
+			<param name="term" type="text" size="10" value="" label="GO term"></param>
+			
+			<param name="site" type="hidden" value="http://biit.cs.ut.ee/gprofiler/index.cgi" label="Address"/>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Creates a link out to g:Profiler, GOst of a query to enrich terms using a specific GO identifier.   
+			
+**Input:** A GO term identifier
+			
+**Output:** A link out to g:Profiler, GOst
+
+----
+			
+g:Profiler article: J. Reimand, T. Arak, J. Vilo. g:Profiler -- a web server for functional interpretation of gene lists (2011 update). Nucleic Acids Research, 2011.
+        </help>
+</tool>

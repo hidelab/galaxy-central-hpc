@@ -1,0 +1,128 @@
+<tool id="gProfiler3" name="GOSt: link" version="1.0.1">
+        <description>go to g:Profiler with a gene set</description>
+        
+        <command interpreter="perl">gPro_GOSt.pl $input $output $site $spec $out_type $sort $signif $pcut $prefix $algo $domain_size_type $ordered $no_iea $region $term</command>
+        
+        <inputs> 
+			<param name="input" type="data" format="txt" label="Annotate these genes"/>
+			
+			<param name="site" type="hidden" value="http://biit.cs.ut.ee/gprofiler/index.cgi" label="Address"/>
+			
+            <param name="spec" type="select" value="hsapiens" label="Species">
+               	<option value="hsapiens" selected="true">Homo sapiens</option>
+				<option value="mmusculus">Mus musculus</option>
+				<option value="scerevisiae">Saccharomyces cerevisiae</option>
+				<option value="rnorvegicus">Rattus norvegicus</option>
+				<option value="dmelanogaster">Drosophila melanogaster</option>
+				<option value="celegans">Caenorhabditis elegans</option>
+				<option value="drerio">Danio rerio</option>
+			</param>
+				 
+            <param name="out_type" type="select" value="txt" label="Reporting Type">
+               	<option value="txt" selected="true">HTML Document</option>
+               	<option value="png">PNG Image</option>
+                <option value="xls">Excel File</option>
+                <option value="mini">Tab Delimited</option>
+			</param>
+                
+            <param name="sort" type="select" value="1" label="Hierarchical Sorting">
+            	<option value="1" selected="true">Yes</option>
+            	<option value="0">No</option>
+            </param>
+                
+			<param name="signif" type="select"  value="1" label="Significant Results Only">
+				<option value="1" selected="true">Yes</option>
+            	<option value="0">No</option>
+            </param>
+                
+            <param name="pcut" type="float" size="5" value="1" label="P-value Cutoff"></param>
+                
+            <param name="prefix" type="select" value="ENTREZGENE_ACC" label="Numerical ID Type">
+              	<option  value='ENTREZGENE_ACC' selected="true">ENTREZGENE_ACC</option>
+               	<option  value='AFFY_HUGENE_1_0_ST_V1'>AFFY_HUGENE_1_0_ST_V1</option>
+				<option  value='MIM_GENE_ACC'>MIM_GENE_ACC</option>
+				<option value='SHARES_CDS_WITH_ENST'>SHARES_CDS_WITH_ENST</option>
+				<option  value='HGNC_AUTOMATIC_GENE_ACC'>HGNC_AUTOMATIC_GENE_AC</option>
+				<option  value='PUBMED'>PUBMED</option>
+				<option  value='HGNC_MB001_ACC'>HGNC_MB001_ACC</option>
+				<option  value='HGNC_ACC'>HGNC_ACC</option>
+				<option  value='WIKIGENE_ACC'>WIKIGENE_ACC</option>
+				<option  value='DBASS5_ACC'>DBASS5_ACC</option>
+				<option  value='ILLUMINA_HUMANWG_6_V1'>ILLUMINA_HUMANWG_6_V1</option>
+				<option  value='MIM_MORBID_ACC'>MIM_MORBID_ACC</option>
+				<option  value='AFFY_HUEX_1_0_ST_V2'>AFFY_HUEX_1_0_ST_V2</option>
+				<option  value='DBASS3_ACC'>DBASS3_ACC</option>
+			</param>
+                
+    		<param name="algo" type="select" value="analytical" label="Multiple Testing Correction">
+               	<option value='analytical' selected="true">g:SCS Threshold</option>
+				<option value='bonferroni' >Bonferroni Correction</option>
+				<option value='fdr' >Benjamini-Hochberg FDR</option>
+            </param>
+                
+            <param name="domain_size_type" type="select" value="annotated" label="Domain">
+				<option  value='annotated' selected="true">Only annotated genes</option>
+				<option  value='known'>All known genes</option>
+            </param>
+                
+            <param name="ordered" type="select" value="1" label="Ordered Gene List">
+            	<option value="1" selected="true">Yes</option>
+            	<option value="0">No</option>
+            </param>
+                
+            <param name="no_iea" type="select" value="1" label="No electronic annotation (IEA)">
+            	<option value="1" selected="true">Yes</option>
+            	<option value="0">No</option>
+            </param>
+                
+            <param name="region" type="select" value="0" label="Chromosomal Regions">
+            	<option value="0" selected="true">No</option>
+            	<option value="1">Yes</option>
+            </param>  
+            
+            <param name="term" type="hidden" value="None" label="TermID"></param>
+        </inputs>
+        <outputs>
+                <data name="output" format="html"/>
+        </outputs>
+       
+        <help>
+**Function:** Creates a link out for a query to g:Profiler annotations. 
+			
+**Input:** A text list of gene identifiers of any type.
+
+* CASC5
+* ENSG00000137812
+* 57082
+* ENST00000533001
+* Q8NG31
+* AF173994					
+* CCDS42023.1
+* BRCA1
+* ENSG00000012048
+* P38398 
+* U14680
+* NM_007294
+* CCDS11453.1
+
+**Settings:**  
+
+* Species of query organism 
+* Reporting type - image, html, Excel file, or text table
+* Hierarchical sorting - sorting done hierarchically or by p-value
+* Significant results only - show all results or only those deemed significant
+* P-value cutoff - specify if showing all results (not just significant) to provide a cutoff for resulting p-value
+* Numerical ID Type - if any purely numerical identifiers are used, specify its type
+* Multiple testing correction type
+* Domain - show all genes or just those genes that have been manually curated 
+* Ordered gene list - treat the inputted gene list as ranked for enrichment
+* No electronic annotation (IEA) - use or forego electronic (IEA) annotations 
+* Chromosomal regions - input is chromosomal regions instead of identifiers
+			
+**Output:** A link to g:Profiler, GOst.
+    
+----
+			
+g:Profiler article: J. Reimand, T. Arak, J. Vilo. g:Profiler -- a web server for functional interpretation of gene lists (2011 update). Nucleic Acids Research, 2011.
+        </help>
+</tool>

@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<tool id="scde-list-match" name="SCDE ListMatch" version="1.0" hidden="false">
+<description>match a list against one or more selected reference gene lists</description>
+<version_string>scde --version</version_string>
+
+<command interpreter="perl">
+    scde match --source   $source
+               --organism    $organism
+
+               #if str($symbol_type) != ""
+               --symbol      $symbol_type
+               #end if
+
+               #if $query.type == "file"
+               --file        $query.filename
+               --column      $query.column
+               #else
+                             $query.source
+               #end if
+               --min-matches $min_matches
+               --output      $format
+
+               #if str($output_html) != "None"
+               > $output_html
+               #else
+               > $output_tab
+               #end if
+</command>
+
+<inputs>
+  <param name="source" type="select" label="Compare your gene list to">
+    <option value="wikipathways">Wikipathways</option>
+    <option value="genesigdb">GeneSigDB</option>
+    <option value="msigdb">MSigDB</option>
+    <option value="scd">SCDE Repository - Public</option>
+  </param>
+
+  <param name="organism" type="select" label="Query Organism" help="Which organism did your gene list come from?">
+    <option value="human">Human</option>
+    <option value="mouse">Mouse</option>       
+  </param>
+
+  <param name="symbol_type" type="select" label="Query Gene ID Type" help="Select the gene identifier type to search with.">
+    <option value="symbol">Gene Symbol</option>
+    <option value="ensembl">Ensembl ID</option>
+    <option value="entrez">Entrez ID</option>
+  </param>
+
+  <conditional name="query">
+    <param name="type" type="select" label="Query source" help="You may select a file from your User History or enter a list of genes as text.">
+      <option value="file">History File</option>
+      <option value="text">Enter Text</option>
+    </param> 
+
+    <when value="file"> 
+      <param name="filename" format="txt" type="data" label="Query History File" help="Select a file from your History"/>
+      <param name="column" type="data_column" data_ref="filename" label="Query File Column Number" help="Column numbers start at 1. Verify that the column number corresponds to the Gene ID Type you specified."/>
+    </when>
+
+    <when value="text">
+      <param name="source" type="text" area="true" size="5x60" label="Query using Text Entry" help="Paste a list of gene symbols here, separated by a space, tab, new line or a comma."/>
+    </when>
+  </conditional>
+
+  <param name="min_matches" type="select" label="Minimum Number of Matches" help="Select the minimum number of genes that must be matched per reference gene list.">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </param>
+
+  <param name="format" type="select" label="Output Format" help="Select the format for the output file.">
+    <option value="html">HTML</option>
+    <option value="tab">Tab Delimited</option>
+  </param>
+</inputs>
+
+<outputs>
+  <data format="html" name="output_html">
+    <filter>format == "html"</filter>
+  </data>
+  <data format="tabular" name="output_tab">
+    <filter>format == "tab"</filter>
+  </data>
+</outputs> 
+
+<!-- MongoDB driver deprecation warnings are sent to stderr causing tool execution getting marked as failed -->
+<stdio>
+  <exit_code range="1:" level="fatal" description="Error running tool"/>
+</stdio>
+
+<help>
+**What it does**
+
+This tool compares a list of genes as a query against one or more selected reference lists.
+
+-----
+
+.. class:: infomark
+
+Please upload your data as a tab-delimited text file. If the column number does not appear as a dropdown menu, make sure the file type is 'Tabular'.
+
+-----
+
+**Screencast!**
+
+Watch the SCDE ListMatch Screencast_ (right click to open this link in another window).
+
+.. _Screencast: http://discovery.hsci.harvard.edu/screencasts/galaxy.html
+</help>
+</tool>

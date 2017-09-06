@@ -1,0 +1,48 @@
+<tool id="gProfiler2" name="Convert IDs (g:Convert)" version="1.0.1">
+        <description>Uses g:Profiler to convert ids</description>
+        
+        <command interpreter="python">gPro_convert.py $input $output $site $target </command>
+       
+        <inputs> 
+			<param name="input" type="data" format="txt" label="Annotate these genes"/>
+			
+			<param name="site" type="hidden" value="http://biit.cs.ut.ee/gprofiler/gconvert.cgi" label="Address"/>
+			
+			<param name="target" type="select" value="HGNC" label="Convert to this id type">
+               	<option value="1" selected="true">HGNC</option>
+				<option value="2">ENTREZ Gene</option>
+				<option value="3">Ensembl Gene</option>
+			</param>
+        </inputs>
+        <outputs>
+                <data name="output" format="txt"/>
+        </outputs>
+       
+        <help>
+**Function:** Converts identifier types to either HGNC, Entrez gene or Ensembl gene in human.
+			
+**Input:** A list of identifiers of mixed type in a single column with a text format.  
+			
+* CASC5
+* ENSG00000137812
+* 57082
+* ENST00000533001
+* Q8NG31
+* AF173994					
+* CCDS42023.1
+* BRCA1
+* ENSG00000012048
+* P38398 
+* U14680
+* NM_007294
+* CCDS11453.1
+					
+**Settings:** Select either HGNC, Entrez, or Ensembl gene identifier to convert to.  All identifier types accepted mixed in a list.  All purely numeric ids are assumed to be Entrez gene ids.
+			
+**Output:** A list of converted ids in text format.  Those ids without a match are dropped and only those with a proper, unambiguous conversion are displayed.  Duplicate ids in input are represented once in the output.
+
+----
+			
+g:Profiler article: J. Reimand, T. Arak, J. Vilo. g:Profiler -- a web server for functional interpretation of gene lists (2011 update). Nucleic Acids Research, 2011.
+        </help>
+</tool>

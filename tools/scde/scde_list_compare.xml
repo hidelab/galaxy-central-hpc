@@ -1,0 +1,95 @@
+<tool id="scde-list-compare" name="SCDE ListCompare" version="1.0" hidden="false">
+<description>compare multiple lists against one or more selected reference lists</description>
+<version_string>scde --version</version_string>
+
+<command interpreter="perl">
+    scde compare --source $source
+
+                 #for $i in $lists
+                 --file     ${i.filename}
+                 --column   ${i.column}
+                 --organism ${i.organism}
+                 --symbol   ${i.symbol_type}
+                 #end for
+                 --output   $format 
+
+                 #if str($output_html) != "None"
+                 > $output_html
+                 #else
+                 > $output_tab
+                 #end if
+</command>
+
+<inputs>
+  <param name="source" type="select" label="Compare your gene lists to">
+    <option value="wikipathways">Wikipathways</option>
+    <option value="genesigdb">GeneSigDB</option>
+    <option value="msigdb">MSigDB</option>
+    <option value="scd">SCDE Repository - Public</option>
+  </param>
+
+  <repeat name="lists" title="Add List" min="2" >
+    <param name="filename" type="data" format="txt" label="Dataset" help="Select a list for comparison from your History." />
+
+    <param name="column" type="select" label="Gene Column" help="Select the column number corresponding to the gene identifier">
+      <option value="1">c1</option>
+      <option value="2">c2</option>
+      <option value="3">c3</option>
+      <option value="4">c4</option>
+      <option value="5">c5</option>
+      <option value="6">c6</option>
+      <option value="7">c7</option>
+      <option value="8">c8</option>
+      <option value="9">c9</option>
+      <option value="10">c10</option>
+    </param>
+
+    <param name="organism" type="select" label="Query Organism" help="Which organism do your gene lists come from?">
+      <option value="human">Human</option>
+      <option value="mouse">Mouse</option>
+    </param>
+
+    <param name="symbol_type" type="select" label="Query Gene ID Type" help="Select the gene identifier type to search with.">
+      <option value="symbol">Gene Symbol</option>
+      <option value="ensembl">Ensembl ID</option>
+      <option value="entrez">Entrez ID</option>
+    </param>
+  </repeat>
+
+  <param name="format" type="select" label="Output Format" help="Select the Format for the Output File">
+    <option value="html">HTML</option>
+    <option value="tab">Tab Delimited</option>
+  </param>
+</inputs>
+
+<outputs>
+  <data format="html" name="output_html">
+    <filter>format == "html"</filter>
+  </data>
+  <data format="tabular" name="output_tab">
+    <filter>format == "tab"</filter>
+  </data>
+</outputs> 
+
+<!-- MongoDB driver deprecation warnings are sent to stderr causing tool execution getting marked as failed -->
+<stdio>
+  <exit_code range="1:" level="fatal" description="Error running tool"/>
+</stdio>
+
+<help>
+**What it does**
+
+This tool compares two or more sets of gene lists against one or more selected reference lists.
+
+-----
+
+.. class:: infomark
+
+Upload data in tabular format to your history using the "Get Data" -> "Upload File" tool.
+
+.. class:: infomark
+
+Additional lists may be added using the "Add new List" button.
+</help>
+</tool>  
+

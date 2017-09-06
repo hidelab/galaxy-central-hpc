@@ -1,0 +1,44 @@
+<tool id="pathprint-distance" name="Find Distance to Pluripotent Signature">
+
+<!--
+<description>Find Distance to Pluripotent Signature</description>
+-->
+
+  <command>distance.r $input $output $output2</command>
+
+  <inputs> 
+    <param name="input" type="data" label="Pathway Fingerprint" help="Submit a PathPrint Fingerprint file from your history to determine how similar your experiment is to pluripotent samples in GEO"/> 
+  </inputs>
+
+  <outputs> 
+    <data format="tabular" name="output" label="Distance from pluripotent consensus"/>
+    <data format="pdf" name="output2" label="Histogram"/> 
+  </outputs>
+
+  <stdio>
+    <exit_code range="1:" level="fatal" />
+  </stdio>
+
+  <help> 
+
+**What it does**
+
+This tool takes the computed PathPrint Fingerprint as input and uses it to determine how similar
+your data are to a consensus signature generated from a set of pluripotent samples in GEO. 
+
+-----
+
+**Input**: A PathPrint Fingerprint file from your history
+
+**Output**: 
+
+1. Distance from pluripotent consensus: tab delimited file containing distance and p-value for each sample from the pluripotent consensus signature.
+
+2. Histogram: PDF file containing two histograms: (1) distribution of distances for ~180,000 GEO samples from the pluripotent signature; (2) distribution of distances for the input samples from the pluripotent signature.
+
+-----
+
+Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+  </help>
+</tool>
+

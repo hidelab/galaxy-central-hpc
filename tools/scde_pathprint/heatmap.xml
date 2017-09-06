@@ -1,0 +1,52 @@
+<tool id="pathprint-heatmap" name="Generate a Heatmap">
+
+<!--
+<description>Generate a Heatmap</description>
+-->
+
+<command>heatmap.r $input $sdev $output</command>
+
+<inputs> 
+  <param name="input" type="data" label="Pathway Fingerprint" help="Submit a Pathway Fingerprint file from your history. Note that your file must contain multiple samples"/>
+  <param name="sdev" type="select" label="Standard deviation" help="Display only pathways with the selected standard deviation across samples">
+      <option value="0.9">0.9</option>
+      <option value="0.8">0.8</option>
+      <option value="0.7" selected="true">0.7 (default)</option>
+      <option value="0.6">0.6</option>
+      <option value="0.5">0.5</option>
+    </param>
+</inputs>
+
+<outputs> 
+  <data format="pdf" name="output" label="Heatmap"/> 
+</outputs>
+
+<stdio>
+  <exit_code range="1:" level="fatal" />
+</stdio>
+
+<help> 
+**What it does**
+
+This tool creates a heatmap showing pathways with highest variability across samples (i.e. above the selected standard deviation threshold).
+
+.. class:: infomark
+
+You must have multiple samples in your PathPrint fingerprint file to generate a heatmap.
+
+-----
+
+**Input**: A PathPrint fingerprint file containing multiple samples from your History and a standard deviation cutoff.
+
+Samples that are very similar to each other may not have any pathways meeting the standard deviation threhold, which will result in an error. If this occurs, try lowering the threshold.
+
+If too many pathways are returned, labels will not be shown.  Try increasing the standard deviation cutoff.
+
+**Output**: PDF file showing a heatmap of the most variable pathway activities
+
+-----
+
+Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+</help>
+</tool>
+

@@ -1,0 +1,92 @@
+---
+# Configuration definining available processing pipelines and inputs
+
+pipelines:
+  - name: Alignment
+    type: nextgen
+    description: >
+      Align reads with Bowtie, returning sorted BAM file and PDF
+      with quality statistics.
+    formats: [fastq, bam]
+    params:
+      - name: Include reads that map to multiple locations?
+        id: multiple_mappers
+        choices: ['yes', 'no']
+      - name: Organism 
+        id: genome_build
+        type: genome_build
+      - name: Multiplex
+        type: barcode
+  - name: Variant calling
+    type: nextgen
+    description: >
+      Align reads with BWA, recalibration, realign and variant call with GATK.
+      Returns sorted BAM file, variant cals in VCF format, tab separated file of
+      predicted effects and PDF with quality statistics.
+    formats: [fastq, bam]
+    params:
+      - name: Target file
+        id: hybrid_target
+        type: file
+        formats: [bed]
+      - name: Bait file
+        id: hybrid_bait
+        type: file
+        formats: [bed]
+      - name: Organism
+        id: genome_build
+        type: genome_build
+      - name: Coverage Depth
+        id: coverage_depth
+        choices: ["high", "low"]
+      - name: Genome regions targetted
+        id: coverage_interval
+        choices: ["exome", "genome", "regional"]
+      - name: Multiplex
+        type: barcode
+  # - name: ChIP-seq
+  #   type: nextgen
+  #   description: >
+  #     Align reads with Bowtie and call peaks with MACS. Return bigWig file of
+  #     coverage and BED file of peak calls for visualization along with a summary
+  #     PDF of read quality.
+  #   formats: [fastq, bam]
+  #   params:
+  #     - name: Include reads that map to multiple locations?
+  #       id: multiple_mappers
+  #       choices: ['no', 'yes']
+  #     - name: Organism 
+  #       id: genome_build
+  #       type: genome_build
+  #     - name: Multiplex
+  #       type: barcode
+
+barcodes:
+  - name: Illumina
+    data:
+    - 1: ATCACG
+    - 2: CGATGT
+    - 3: TTAGGC
+    - 4: TGACCA
+    - 5: ACAGTG
+    - 6: GCCAAT
+    - 7: CAGATC
+    - 8: ACTTGA
+    - 9: GATCAG
+    - 10: TAGCTT
+    - 11: GGCTAC
+    - 12: CTTGTA
+  - name: 454-Rapid
+    data:
+    - RL1: ACACGACGACT
+    - RL2: ACACGTAGTAT
+    - RL3: ACACTACTCGT
+    - RL4: ACGACACGTAT
+    - RL5: ACGAGTAGACT
+    - RL6: ACGCGTCTAGT
+    - RL7: ACGTACACACT
+    - RL8: ACGTACTGTGT
+    - RL9: ACGTAGATCGT
+    - RL10: ACTACGTCTCT
+    - RL11: ACTATACGAGT
+    - RL12: ACTCGCGTCGT

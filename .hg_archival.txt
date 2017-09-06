@@ -1,0 +1,6 @@
+repo: ae898a17920b62e1aab2d6c181131062758c1535
+node: ea9ec39a5c6b9aaa88ef0817bf5e42aa478ec5b1
+branch: default
+latesttag: latest_2014.08.11
+latesttagdistance: 5
+changessincelatesttag: 232

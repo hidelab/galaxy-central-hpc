@@ -1,0 +1,21 @@
+Each of these files describes the interface for one of the tools in Galaxy:
+
+  * fingerprint.xml - Create Pathway Fingerprint
+  * distance.xml - Calculate Distance to Consensus
+  * similar-experiments.xml - Find Similar Experiments in GEO
+  * histogram.xml - Generate a Histogram
+  * heatmap.xml - Generate a Heatmap
+
+Each interface calls a corresponding R file that performs the actions:
+
+  * fingerprint.r
+  * distance.r
+  * similar-experiments.r
+  * histogram.r
+  * heatmap.r
+
+Shared fuctions are kept in this file:
+
+  * galaxy-pathprint.r
+
+

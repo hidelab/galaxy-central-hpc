@@ -1,0 +1,26 @@
+<tool id="csweb" name="Cytoscape Web: Display Net" version="1.0.1">
+        <description>analyze your network</description>
+        <command interpreter="python">create_csweb.py $graph $config $output $graph.extra_files_path</command>        
+        
+        <inputs>
+                <param name="graph" type="data" format="txt" label="Select a graph"/>
+                
+                <param name="config" type="hidden" value="csweb_config.yaml" label="config file"/>
+                
+        </inputs>
+        <outputs>
+                <data name="output" format="html"/>
+        </outputs>
+        <help>
+**Function:** Display a graph from a network file.
+			
+**Input:** XGMML, GML in text format
+			
+**Output:** HTML graph
+			
+----
+
+Cytoscape Web article: Lopes CT, Franz M, Kazi F, Donaldson SL, Morris Q, Bader GD. Cytoscape Web: an interactive web-based network browser. Bioinformatics. 2010 Sep 15;26(18):2347-8.
+
+        </help>
+</tool>

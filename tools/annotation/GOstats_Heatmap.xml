@@ -1,0 +1,43 @@
+<tool id="heatmap" name="GOstats: Heatmap" version="1.0.1">
+	<description>creates a heatmap of enriched GO terms for multiple gene lists</description>
+	<command interpreter="python">GOstats_Heatmap.py $output $min_set $ontology $pcut $input1 $input2 
+		#for $i in $inputs
+        	${i.input}
+      	#end for 
+	</command>
+	<inputs>
+		<param name="min_set" type="integer" size="2" value="2" label="Min gene sets"/>
+		
+		 <param name="ontology" type="select" value="bp" label="Type of GO ontology">
+            <option value="BP" selected="true">Biological Process</option>
+			<option value="MF">Molecular Function</option>
+			<option value="CC">Cellular Component</option>
+		</param>
+					 
+		<param name="pcut" type="float" size="5" value="0.1" label="P-value cutoff"/>
+		
+		<param name="input1" label="First gene list" type="data" format="txt"/>
+		<param name="input2" label="Second gene list" type="data" format="txt"/>
+    	<repeat name="inputs" title="Gene lists">
+      		<param name="input" label="Add gene list" type="data" format="txt"/>
+		</repeat>
+
+	</inputs>
+	<outputs>
+    	<data name="output" format="pdf"/>
+	</outputs>
+
+	<help>
+**Function:** Produces a heatmap for the comparison of enriched GO terms in multiple gene lists.  Enrichment of each gene list is determined using GOstats.  Using the p-value from this enrichment, the heatmap represents the significance of a term for groups of genes in the gene list. Different gene lists may include different genes to find relevant GO terms.
+		
+**Settings:** Select ontology type of biological process, molecular function, or biological process.  Chose a p-value cutoff.
+		
+**Input:** Two or more gene lists having a mix of gene identifiers in tabular format.  It uses Entrez gene ids naturally, but any identifier type may be used as all ids are converted to Entrez using g:Profiler, g:Convert.
+		
+**Output:** A pdf heatmap image displaying enriched terms common to the gene lists.		
+		
+----
+		
+GOstats article: S Falcon and R Gentleman. Using GOstats to test gene lists for GO term association. Bioinformatics, 23(2):257-8, 2007.
+	</help>
+</tool>

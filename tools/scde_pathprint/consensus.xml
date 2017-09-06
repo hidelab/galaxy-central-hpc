@@ -1,0 +1,43 @@
+<tool id="pathprint-consensus" name="Create a Consensus">
+  <command>consensus.r $input $threshold $output</command>
+
+  <inputs> 
+    <param name="input" type="data" label="Pathway Fingerprint" help="Submit a Pathway Fingerprint file from your history"/> 
+
+    <param name="threshold" type="select" label="Threshold" help="Select a threshold value">
+      <option value="0.9">0.9</option>
+      <option value="0.8" selected="true">0.8 (default)</option>
+      <option value="0.7">0.7</option>
+      <option value="0.6">0.6</option>
+      <option value="0.5">0.5</option>
+    </param>
+  </inputs>
+
+  <outputs> 
+    <data format="tabular" name="output" label="Consensus Fingerprint"/> 
+  </outputs>
+
+  <stdio>
+    <exit_code range="1:" level="fatal" />
+  </stdio>
+
+  <help> 
+
+**What it does**
+
+This tool identifies the most prevalent PathPrint value for each pathway across the submitted samples and produces a consensus PathPrint.
+
+The method calculates the mean value of the pathway activities across samples, and then applies the threshold such that if the mean is greater than threshold, the pathway is assigned a consensus of +1. If the mean is less than -threshold, a value of -1 is assigned. Otherwise, the consensus is assigned a value of 0.
+
+-----
+
+**Input:** PathPrint fingerprint for multiple samples and a threshold value. 
+
+**Output:** A single consensus PathPrint fingerprint representing the most commonly occurring value
+
+-----
+
+Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+  </help>
+</tool>
+

@@ -1,0 +1,26 @@
+<tool id="ensembl0" name="EnsEMBL: Find Genes" version="1.0.1">
+        <description>Get genes on your intervals</description>
+        <command interpreter="python">bed_to_gene.py $input $species $output</command>
+        <inputs>
+                <param name="input" type="data" format="bed" label="Use these intervals"/>
+                <param name="species" type="select" value="Human" label="input id type">
+                	<option value="Human" selected="true">Human</option>
+					<option value="Mouse">Mouse</option>
+				</param>
+        </inputs>
+        <outputs>
+                <data name="output" format="bed"/>
+        </outputs>
+       
+        <help>
+**Function:** Fetches the genes located on inputted intervals
+			
+**Input:** A BED file of intervals
+			
+**Output:** A BED file containing the intervals and Ensembl gene ids.
+
+----
+
+Ensembl article: P Flicek, et.al. Ensembl 2011. Nucleic Acids Research, Database issue, 2011, D800-D806.	
+        </help>
+</tool>

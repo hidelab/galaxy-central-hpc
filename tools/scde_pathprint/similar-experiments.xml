@@ -1,0 +1,38 @@
+<tool id="pathprint-similar" name="Find Similar Experiments in GEO">
+
+<!--
+<description>Find Similar Experiments in GEO</description>
+-->
+
+  <command>similar-experiments.r $input $output</command>
+
+  <inputs> 
+    <param name="input" type="data" label="Pathway Fingerprint" help="Submit a PathPrint Fingerprint from your history"/> 
+  </inputs>
+
+  <outputs> 
+    <data format="html" name="output" label="Similar Experiments in GEO"/> 
+  </outputs>
+
+  <stdio>
+    <exit_code range="1:" level="fatal" />
+  </stdio>
+
+  <help> 
+
+**What it does**
+
+This tool takes a PathPrint Fingerprint as input and identifies experiments in GEO that are most similar based on a Manhattan distance. 
+
+-----
+
+**Input:** PathPrint Fingerprint file from your History
+
+**Output:** Html page showing the most similar GEO experiments, their distance and associated p-value. Entries are linked to GEO.
+
+-----
+
+Feedback is welcome. Please send your questions, comments and suggestions to scde@hsci.harvard.edu.
+  </help>
+</tool>
+
